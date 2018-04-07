@@ -1,7 +1,7 @@
 ## how to watch ?
 ```
 yarn
-parcel index.html
+npm run watch
 ````
 
-go to http://localhost:1234
+go to http://localhost:8080
