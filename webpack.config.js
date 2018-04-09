@@ -5,6 +5,9 @@ module.exports = {
     output: {
         filename: 'bundle.js'
     },
+    performance: {
+        hints: false
+    },
     module: {
         rules: [{
                 test: /\.js$/,

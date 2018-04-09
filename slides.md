@@ -1,5 +1,8 @@
 ## three.js
 Nicolas Bouvet
+Note:
+découvrir le pipeline pour créer des xp 3d (jeux, sites, ...)
+au travers de three.js
 
 ---
 
@@ -8,6 +11,8 @@ Nicolas Bouvet
     * 60fps = 1/60s = 16.667ms
 * 3d = monde en 3 dimensions
 * Interactive = monde influençable
+
+<img src="images/duh.jpg" width="200">
 Note:
 c'est ce que nous allons voir au travers de threejs  
 pas uniquement lib mais aussi fondamentaux du dev 3d
@@ -21,24 +26,121 @@ Ecran -> fenêtre vers ce monde 3d. (d'autres exemples qu'un écran)
 
 interactive = signifie que l'on peut influencer sur ce qu'il y a à l'écran (exemple basique : jeux vidéos)  
 
-importance: identifier besoins/bottlenecks perfs, ...
+implications: identifier besoins/bottlenecks, perfs, concessions...
 
 ---
 
 ### Hardware
 ![](images/Graphics3D_Hardware.png)
+* gestion mémoire vive et gpu
+* où sont exécutées les fonctions
+* identifier les devices ciblés
+Note:
+connaître où sont exécutées les fonctions
+où sont stockées les textures, framebuffers, images, meshes...
+gestion mémoire gpu
+GPU très hétérogènes, téléphones mobiles, ...
+Penser aux devices dès le début du projet
 
 ---
 
 ### 3d Pipeline
-![](images/pipeline.jpg)
-
+<img src="images/pipeline.jpg" width="800">
 Note:
 scan conversion :
 * Line drawing
 * Polygon filling
 * Depth test
 * Texturing
+
+---
+
+### Etape 1 : Application
+* IHM
+* Modification du monde 3d
+* Gestion des ressources (objets 3d, images, ...)
+* résultat : liste de vertex/points, triangles, ...
+Note:
+si on appuie sur une touche, le personnage avance, dans quelle direction, de combien d'unités
+
+---
+
+### Etape 2 : Geometry
+* model & view transformations
+* vertex shading & illumination
+* projection
+* clipping
+* screen mapping
+
+-=-
+
+### Model & view transformations
+<img src="images/modelview_world.jpg" width="750">
+* model transform: calcul de la position de l'objet selon sa translation/orientation/scale
+Note:
+les objets sont placés dans le monde, on calcule sa transformation sous forme de matrice
+
+-=-
+
+### Model & view transformations
+<img src="images/modelview_computer.jpg" width="750">
+* view transform: calcul de la position de l'objet selon la translation/orientation de la caméra
+Note:
+la caméra est en fait fixe. La view transform déplace tout le monde de telle sorte de ramener le monde autour de la caméra fixe.
+Avec un peu de magie, on obtient ce qu'on appelle la model-view matrix, qui fournit une matrice de transformation pour l'objet, de telle sorte qu'on ait l'illusion qu'on regardee à travers cette caméra.
+
+-=-
+
+### Vertex shading
+* manipulation des vertex à travers des shaders
+* déformation, animation, skinning
+* normales pour l'illumination
+* très performant, relativement peu coûteux
+
+-=-
+
+### Projection
+<img src="images/perspective_frustum1.jpg" width="700">
+* forme de pyramide
+* field of view, near/far clipping plane
+* distorsion avec la distance  
+(oeil humain : 135° vertical, 200° horizontal)
+
+-=-
+
+### Projection
+<img src="images/perspective_view.jpg" width="700">  
+résultat de projection en perspective
+
+-=-
+
+### Projection
+<img src="images/ortho_frustum.jpg" width="700">
+* forme de cube
+* pas de distorsion avec la distance
+
+-=-
+
+### Projection
+<img src="images/orthoview.jpg" width="700">  
+résultat de projection en vue orthogonale
+
+-=-
+
+### Clipping
+* Tout ce qui n'est pas dans le volume visible est ignoré
+* Fait sur le GPU, mais d'autres méthodes existent sur le CPU
+
+-=-
+
+### ex: Frustum culling
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ORFuqih9V6Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+-=-
+
+### Rasterization
+* 3d data > screen space coordinates
+* 
 
 ---
 
