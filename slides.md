@@ -142,6 +142,11 @@ résultat de projection en vue orthogonale
 * 3d data > screen space coordinates
 * 
 
+-=-
+
+### Z-Buffer
+![](images/painters_algorithm.png)
+
 ---
 
 ### 3d pipeline
@@ -172,8 +177,19 @@ utilisation des opérations classiques : multiplication, cross product, dot prod
 
 ---
 
-### Z-Buffer
-![](images/painters_algorithm.png)
+### WebGL
+* Canvas
+* créé par le Khronos group
+* v1: 3 mars 2011
+* v2 : 17 janvier 2017
+Firefox 4+, Google Chrome 9+, Opera 12+, Safari 5.1+ and Internet Explorer 11+
+Note:
+Khronos group = consortium dont le but est de créer des APIs multimédia publiques et gratuites  
+En juin 2011, Microsoft exprime sa défiance vis-à-vis de la techno  
+En juin 2013, Microsoft annonce le support dans IE11  
+three.js, babylon.js, blend4web  
+Certains moteurs pro offrent un export en webgl : unity, unreal engine...
+Egalement utilisé pour la 2d
 
 ---
 
