@@ -1,6 +1,6 @@
-## three.js
-Nicolas Bouvet
-bouvet.nicolas+esgi@gmail.com
+## three.js  
+Nicolas Bouvet  
+[bouvet.nicolas+esgi@gmail.com](mailto:bouvet.nicolas+esgi@gmail.com)
 Note:
 découvrir le pipeline pour créer des xp 3d (jeux, sites, ...)
 au travers de three.js
@@ -10,10 +10,11 @@ au travers de three.js
 ### Interactive 3D Rendering
 * Rendering = créer une image
     * 60fps = 1/60s = 16.667ms
+
 * 3d = monde en 3 dimensions
 * Interactive = monde influençable
 
-<img src="images/duh.jpg" width="200">
+<img src="images/duh.jpg" width="250">
 Note:
 c'est ce que nous allons voir au travers de threejs  
 pas uniquement lib mais aussi fondamentaux du dev 3d
@@ -37,6 +38,8 @@ implications: identifier besoins/bottlenecks, perfs, concessions...
 * où sont exécutées les fonctions
 * identifier les devices ciblés
 Note:
+pourquoi c'est important de le rappeler  
+
 connaître où sont exécutées les fonctions
 où sont stockées les textures, framebuffers, images, meshes...
 gestion mémoire gpu
@@ -45,14 +48,16 @@ Penser aux devices dès le début du projet
 
 ---
 
-### 3d Pipeline
+### classic 3d Pipeline  
+### aka  
+### "forward rendering"
 <img src="images/pipeline.jpg" width="750">
 Note:
-scan conversion :
-* Line drawing
-* Polygon filling
-* Depth test
-* Texturing
+* pipeline utilisé en temps réel et en rendu  
+* unity, unreal engine, godot
+* autre mode : deferred rendering
+
+Décrire succintement chaque étape
 
 ---
 
@@ -60,18 +65,32 @@ scan conversion :
 * IHM
 * Modification du monde 3d
 * Gestion des ressources (objets 3d, images, ...)
-* résultat : liste de vertex/points, triangles, ...
+* Output : liste de vertex/points, triangles, ...
 Note:
-si on appuie sur une touche, le personnage avance, dans quelle direction, de combien d'unités
+* Côté CPU
+* si on appuie sur une touche, le personnage avance, dans quelle direction, de combien d'unités
+* IHM en web : clavier, souris, webcam, gyroscope, casque VR... (webUSB ?)
+* Images -> Textures GPU
+* /!\ Attention aux ressources, sur le Web (mémoire, bande passante, ...)
+
+-=-
+
+### Représentation d'un objet 3d
+<img src="images/GL_GeometricPrimitives.png" width="600">
+* Liste de vertex
+* Type de polygone
+* Optionnel : matériaux, textures, normales, UVs...
+Note:
+Pour bien comprendre la suite, explication de la représentation d'un objet 3d
 
 ---
 
 ### Etape 2 : Geometry
-* model & view transformations
-* vertex shading & illumination
-* projection
-* clipping
-* screen mapping
+* Model & view transformations
+* Vertex shading & illumination
+* Projection
+* Clipping
+* Screen mapping
 
 -=-
 
@@ -207,9 +226,9 @@ la profondeur existante dans le Z-Buffer
 ### Youpi, des pixels.
 <img src="images/meme_harold_ok.jpg" width="500">  
 
----
+-=-
 
-### 3d pipeline
+### Résumé du pipeline 3d
 ![](images/Graphics3D_Pipe.png)
 
 ---
@@ -236,14 +255,81 @@ utilisation des opérations classiques : multiplication, cross product, dot prod
 
 ---
 
-### Objets (meshes)
+### WebGL
+* Créé par le Khronos group
+* v1: 3 mars 2011
+* v2 : 17 janvier 2017
+* Navigateurs : Firefox 4+, Google Chrome 9+,  
+Opera 12+, Safari 5.1+ and Internet Explorer 11+
+* Accessible via Canvas
+Note:
+Khronos group = consortium dont le but est de créer des APIs multimédia publiques et gratuites  
+En juin 2011, Microsoft exprime sa défiance vis-à-vis de la techno  
+En juin 2013, Microsoft annonce le support dans IE11  
+three.js, babylon.js, processing, blend4web  
+Certains moteurs pro offrent un export en webgl : unity, unreal engine...
+Egalement utilisé pour la 2d
 
 ---
 
-three.js
+### Librairies WebGL
+* three.js
+* Babylon.js
+* Processing
+* Unity, Unreal Engine
+
+---
+
+### three.js
+* Créé par Ricardo Cabello (Mr.doob)
+* Première release : 24 avril 2010
+* Actuellement : r90 (14 février 2018)
+* Rendus en WebGL, CSS3D, SVG
 
 ---
 
 ### Mise en place de three.js
 
----
+<section>
+<h3>Hello World !</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+    var camera, scene, renderer,
+    geometry, material, mesh;
+
+    init();
+    animate();
+
+    function init() {
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+        camera.position.z = 1000;
+
+        geometry = new THREE.BoxGeometry( 200, 200, 200 );
+        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+
+        mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.CanvasRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+        document.body.appendChild( renderer.domElement );
+    }
+
+    function animate() {
+        // note: three.js includes requestAnimationFrame shim
+        requestAnimationFrame( animate );
+        render();
+    }
+
+    function render() {
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.02;
+
+        renderer.render( scene, camera );
+    }
+</code></pre>
+</section>
+
+Nouvelle diapo
