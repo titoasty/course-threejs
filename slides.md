@@ -3,7 +3,9 @@ Nicolas Bouvet
 [bouvet.nicolas+esgi@gmail.com](mailto:bouvet.nicolas+esgi@gmail.com)
 Note:
 découvrir le pipeline pour créer des xp 3d (jeux, sites, ...)
-au travers de three.js
+au travers de three.js  
+
+pas uniquement lib mais aussi fondamentaux du dev 3d
 
 ---
 
@@ -17,7 +19,6 @@ au travers de three.js
 <img src="images/duh.jpg" width="250">
 Note:
 c'est ce que nous allons voir au travers de threejs  
-pas uniquement lib mais aussi fondamentaux du dev 3d
 
 rendering = créer une image
 
@@ -40,17 +41,15 @@ implications: identifier besoins/bottlenecks, perfs, concessions...
 Note:
 pourquoi c'est important de le rappeler  
 
-connaître où sont exécutées les fonctions
-où sont stockées les textures, framebuffers, images, meshes...
-gestion mémoire gpu
-GPU très hétérogènes, téléphones mobiles, ...
-Penser aux devices dès le début du projet
+connaître où sont exécutées les fonctions  
+où sont stockées les textures, framebuffers, images, meshes...  
+gestion mémoire gpu  
+GPU très hétérogènes, téléphones mobiles, ...  
+Penser aux devices dès le début du projet  
 
 ---
 
-### classic 3d Pipeline  
-### aka  
-### "forward rendering"
+### classic 3d Pipeline aka "forward rendering"
 <img src="images/pipeline.jpg" width="750">
 Note:
 * pipeline utilisé en temps réel et en rendu  
@@ -76,7 +75,7 @@ Note:
 -=-
 
 ### Représentation d'un objet 3d
-<img src="images/GL_GeometricPrimitives.png" width="600">
+<img src="images/GL_GeometricPrimitives.png" width="450">
 * Liste de vertex
 * Type de polygone
 * Optionnel : matériaux, textures, normales, UVs...
@@ -95,16 +94,22 @@ Pour bien comprendre la suite, explication de la représentation d'un objet 3d
 -=-
 
 ### Model & view transformations
-<img src="images/modelview_world.jpg" width="750">
-* model transform: calcul de la position de l'objet selon sa translation/orientation/scale
+<img src="images/modelview_world.jpg" width="750">  
+model transform : calcul de la position de l'objet selon sa translation/orientation/scale
 Note:
 les objets sont placés dans le monde, on calcule sa transformation sous forme de matrice
 
 -=-
 
+### Matrices 3D
+<img src="images/3d_matrices.png">
+TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;
+
+-=-
+
 ### Model & view transformations
-<img src="images/modelview_computer.jpg" width="750">
-* view transform: calcul de la position de l'objet selon la translation/orientation de la caméra
+<img src="images/modelview_computer.jpg" width="750">  
+view transform : calcul de la position de l'objet selon la translation/orientation de la caméra
 Note:
 la caméra est en fait fixe. La view transform déplace tout le monde de telle sorte de ramener le monde autour de la caméra fixe.
 Avec un peu de magie, on obtient ce qu'on appelle la model-view matrix, qui fournit une matrice de transformation pour l'objet, de telle sorte qu'on ait l'illusion qu'on regardee à travers cette caméra.
@@ -411,7 +416,7 @@ animate();
 
 <section>
 <h3>Hello World !</h3>
-<pre><code data-trim data-noescape style="max-height: 700px;">
+<pre><code data-trim data-noescape style="max-height: 600px;">
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 camera.position.z = 1000;
 
