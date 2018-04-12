@@ -103,7 +103,7 @@ les objets sont placés dans le monde, on calcule sa transformation sous forme d
 
 ### Matrices 3D
 <img src="images/3d_matrices.png">
-TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;
+> TransformedVector = TranslationMatrix x RotationMatrix x ScaleMatrix x OriginalVector;
 
 -=-
 
@@ -125,7 +125,7 @@ Avec un peu de magie, on obtient ce qu'on appelle la model-view matrix, qui four
 -=-
 
 ### Projection
-<img src="images/perspective_frustum1.jpg" width="700">
+<img src="images/perspective_frustum1.jpg" width="600">
 * forme de pyramide
 * field of view, near/far clipping plane
 * distorsion avec la distance  
@@ -155,6 +155,9 @@ résultat de projection en vue orthogonale
 ### Clipping
 * Tout ce qui n'est pas dans le volume visible est ignoré
 * Fait sur le GPU, mais d'autres méthodes existent sur le CPU
+Note:
+Plus compliqué qu'il n'y parait puisque certains objets/polygones peuvent couper l'un des plans de vue (cf. camera view)  
+Les polygones sont coupés à l'intersection avec les bords avec de nouveaux vertex créés
 
 -=-
 
@@ -192,8 +195,9 @@ https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 * Déterminer quels pixels allumer à partir d'un polygone
 * Algorithme populaire : scan-line method
 * Beaucoup de brute force dans ces algos
+* Antialiasing
 Note:
-Parmi les premiers à être accéléré par les GPUs
+Parmi les premiers à être accéléré par les GPUs  
 
 -=-
 
@@ -221,17 +225,18 @@ Parmi les premiers à être accéléré par les GPUs
 
 ### Z-Buffer
 ![](images/zbuffer.jpg)
+* De 0 (plus proche) à 1 (plus éloigné)
 * Pour chaque pixel à dessiner, comparer avec  
 la profondeur existante dans le Z-Buffer
-* De 0 (plus proche) à 1 (plus éloigné)
 * Linéaire (hardcodé) / Logarithmique (shader)
+* DEPTH_WRITE, DEPTH_TEST
 
 ---
 
 ### Youpi, des pixels.
 <img src="images/meme_harold_ok.jpg" width="500">  
 
--=-
+---
 
 ### Résumé du pipeline 3d
 ![](images/Graphics3D_Pipe.png)
@@ -270,7 +275,7 @@ utilisation des opérations classiques : multiplication, cross product, dot prod
 ---
 
 ### Matériaux
-<img src="images/materials.png" width="500">  
+<img src="images/materials.png" width="700">  
 * Propriétés visuelles de l'objet (mais pas que)
 * Entièrement customs : shaders
 
@@ -285,6 +290,11 @@ Principalement utilisé pour définir les propriétés visuelles (réaction à l
 * Directional light : soleil
 * Point light : ampoule, feu, ...
 * Spot light : projecteur, réverbère
+
+---
+
+### Lumières
+<img src="images/lights.jpg" width="600">  
 
 ---
 
@@ -304,7 +314,7 @@ Spot light : émission en en forme de cône
 
 ### WebGL
 * Créé par le Khronos group
-* v1: 3 mars 2011
+* v1 : 3 mars 2011
 * v2 : 17 janvier 2017
 * Navigateurs : Firefox 4+, Google Chrome 9+,  
 Opera 12+, Safari 5.1+ and Internet Explorer 11+
@@ -332,7 +342,7 @@ Avant : Flash, plugin Unity, ...
 ### three.js
 * Créé par Ricardo Cabello (Mr.doob)
 * Première release : 24 avril 2010
-* Actuellement : r91 (14 février 2018)
+* Actuellement : r91 (14 mars 2018)
 * Rendus en WebGL, CSS3D, SVG
 
 ---
@@ -345,6 +355,7 @@ Avant : Flash, plugin Unity, ...
 * <a href="http://www.adultswim.com/music/singles-2017" target="_blank">http://www.adultswim.com/music/singles-2017</a>
 * <a href="https://moments.epic.net/" target="_blank">https://moments.epic.net/</a>
 * <a href="http://pos.biborg.com/fr/" target="_blank">http://pos.biborg.com/fr/</a>
+* <a href="http://www.larsberg.net/#/hexanemone" target="_blank">http://www.larsberg.net/#/hexanemone</a>
 * <a href="http://nico-boo.com/" target="_blank">http://nico-boo.com/</a>
 
 ---
@@ -448,3 +459,5 @@ function animate() {
 animate();
 </code></pre>
 </section>
+
+to be continued...
