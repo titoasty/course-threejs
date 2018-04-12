@@ -12,7 +12,7 @@ import slides from '../slides.md';
 const splits = slides.split(/(<section>.*<\/section>)/s);
 let html = '';
 splits.forEach((split, index) => {
-    if(index % 2 == 0) {
+    if(!split.startsWith('<section')) {
         html += `<section data-markdown data-separator="^\\n---\\n" data-separator-vertical="^\\n-=-\\n">\n \
             <script type="text/template" id="slidesContent" data-template>\n \
                 ${split}\n \

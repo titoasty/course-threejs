@@ -239,6 +239,7 @@ la profondeur existante dans le Z-Buffer
 * Matériaux
 * Lumières
 * Caméra
+* (Scène)
 
 ---
 
@@ -255,6 +256,47 @@ utilisation des opérations classiques : multiplication, cross product, dot prod
 
 ---
 
+### Objets 3D (meshes)
+<img src="images/mesh_example.jpg" width="300">  
+* Vertex
+* Type
+* Optionnel : faces, edges, UVs, normales, matériaux, ...
+
+---
+
+### Matériaux
+<img src="images/materials.png" width="500">  
+* Propriétés visuelles de l'objet (mais pas que)
+* Entièrement customs : shaders
+
+Note:
+Principalement utilisé pour définir les propriétés visuelles (réaction à la lumière)
+
+---
+
+### Lumières
+<img src="images/light_types.svg" width="500" style="background-color: #ffffff;">  
+* Ambient light : lumière diffuse
+* Directional light : soleil
+* Point light : ampoule, feu, ...
+* Spot light : projecteur, réverbère
+
+---
+
+### Lumières
+<img src="images/spotlight.png">  
+Spot light : émission en en forme de cône
+
+---
+
+### Caméra
+<img src="images/mdn-games-3d-camera-settings.png" width="500">  
+* Fov
+* Near, Far
+* Ratio width/height = vertical Fov
+
+---
+
 ### WebGL
 * Créé par le Khronos group
 * v1: 3 mars 2011
@@ -268,7 +310,9 @@ En juin 2011, Microsoft exprime sa défiance vis-à-vis de la techno
 En juin 2013, Microsoft annonce le support dans IE11  
 three.js, babylon.js, processing, blend4web  
 Certains moteurs pro offrent un export en webgl : unity, unreal engine...
-Egalement utilisé pour la 2d
+Egalement utilisé pour la 2d  
+
+Avant : Flash, plugin Unity, ...
 
 ---
 
@@ -283,53 +327,119 @@ Egalement utilisé pour la 2d
 ### three.js
 * Créé par Ricardo Cabello (Mr.doob)
 * Première release : 24 avril 2010
-* Actuellement : r90 (14 février 2018)
+* Actuellement : r91 (14 février 2018)
 * Rendus en WebGL, CSS3D, SVG
 
 ---
 
+### Quelques exemples
+* <a href="https://threejs.org/" target="_blank">https://threejs.org/</a>
+* <a href="http://alteredqualia.com/three/examples/webgl_terrain_dynamic.html" target="_blank">terrain dynamic (altered qualia)</a>
+* <a href="http://mrdoob.com/lab/javascript/webgl/clouds/" target="_blank">clouds (mr doob)</a>
+* <a href="https://interview.ueno.co/" target="_blank">https://interview.ueno.co/</a>
+* <a href="http://www.adultswim.com/music/singles-2017" target="_blank">http://www.adultswim.com/music/singles-2017</a>
+* <a href="https://moments.epic.net/" target="_blank">https://moments.epic.net/</a>
+* <a href="http://pos.biborg.com/fr/" target="_blank">http://pos.biborg.com/fr/</a>
+* <a href="http://nico-boo.com/" target="_blank">http://nico-boo.com/</a>
+
+---
+
 ### Mise en place de three.js
+[https://github.com/titoasty/boilerplate-threejs](https://github.com/titoasty/boilerplate-threejs)
+
+<section>
+<h3>Caméra</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+camera.position.z = 1000;
+</code></pre>
+</section>
+
+<section>
+<h3>Mesh</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var geometry = new THREE.BoxGeometry(200, 200, 200);
+var material = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true
+});
+
+var mesh = new THREE.Mesh(geometry, material);
+</code></pre>
+</section>
+
+<section>
+<h3>Scene</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var scene = new THREE.Scene();
+scene.add(mesh);
+</code></pre>
+</section>
+
+<section>
+<h3>Renderer</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+document.body.appendChild(renderer.domElement);
+</code></pre>
+</section>
+
+<section>
+<h3>Afficher la scène</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+renderer.render(scene, camera);
+</code></pre>
+</section>
+
+<section>
+<h3>Afficher la scène</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+function animate() {
+    requestAnimationFrame(animate);
+
+    mesh.rotation.x += 0.01;
+    mesh.rotation.y += 0.02;
+
+    renderer.render(scene, camera);
+}
+
+animate();
+</code></pre>
+</section>
 
 <section>
 <h3>Hello World !</h3>
 <pre><code data-trim data-noescape style="max-height: 700px;">
-    var camera, scene, renderer,
-    geometry, material, mesh;
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+camera.position.z = 1000;
 
-    init();
-    animate();
+var geometry = new THREE.BoxGeometry(200, 200, 200);
+var material = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true
+});
 
-    function init() {
-        scene = new THREE.Scene();
+var mesh = new THREE.Mesh(geometry, material);
 
-        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z = 1000;
+var scene = new THREE.Scene();
+scene.add(mesh);
 
-        geometry = new THREE.BoxGeometry( 200, 200, 200 );
-        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
 
-        mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
+document.body.appendChild(renderer.domElement);
 
-        renderer = new THREE.CanvasRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+function animate() {
+    requestAnimationFrame(animate);
 
-        document.body.appendChild( renderer.domElement );
-    }
+    mesh.rotation.x += 0.01;
+    mesh.rotation.y += 0.02;
 
-    function animate() {
-        // note: three.js includes requestAnimationFrame shim
-        requestAnimationFrame( animate );
-        render();
-    }
+    renderer.render(scene, camera);
+}
 
-    function render() {
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.02;
-
-        renderer.render( scene, camera );
-    }
+animate();
 </code></pre>
 </section>
-
-Nouvelle diapo
