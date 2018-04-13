@@ -460,4 +460,9 @@ animate();
 </code></pre>
 </section>
 
-to be continued...
+### Projet : Minecraft
+* naviguer dans un monde de cubes
+* créer/modifier/supprimer des cubes
+* au moins **1 shader**
+* au moins un effet graphique  
+(particules, postprocessing, ...)
