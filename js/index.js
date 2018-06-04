@@ -4,15 +4,17 @@ import 'reveal.js/css/reveal.css';
 import 'reveal.js/css/theme/moon.css';
 import 'reveal.js/lib/css/zenburn.css';
 
-import slides from '../slides.md';
+//import slides from '../slides1.md';
+import slides from '../slides2.md';
 
 // load slides markdown
 //document.getElementById("slidesContent").innerHTML = slides;
 
-const splits = slides.split(/(<section>.*<\/section>)/s);
+const splits = slides.split(/(<section>(.(?!section>))*<\/section>)/s);
+console.log(splits);
 let html = '';
 splits.forEach((split, index) => {
-    if(!split.startsWith('<section')) {
+    if(!split.startsWith('<section') && split.trim().length > 0) {
         html += `<section data-markdown data-separator="^\\n---\\n" data-separator-vertical="^\\n-=-\\n">\n \
             <script type="text/template" id="slidesContent" data-template>\n \
                 ${split}\n \
