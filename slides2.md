@@ -1,4 +1,7 @@
 ## three.js
+### Graphe de scène, transformations
+### Caméras, matériaux & couleurs
+
 Nicolas Bouvet
 
 ---
@@ -38,21 +41,26 @@ child.position.x = 300;
 
 scene.add(parent);
 parent.add(child);
+
+// empty container
+new THREE.Object3D();
 </code></pre>
 </section>
+
+### Exercice
+* Une hiérarchie de cubes
+* Les animer indépendamment (clavier/souris/auto)
+
+---
 
 ### Transformations
 
 * translation
 * rotation
 * scale
-
----
-
-### Exercice
-* Un cube racine
-* Un cube enfant
-* Les animer indépendamment (clavier/souris)
+Note:
+transformations -> matrice de transformation
+matrices multipliées suivant le graphe de scène
 
 <section>
 <h3>Transformations</h3>
@@ -69,8 +77,8 @@ console.log(mesh.scale);
 
 <img src="images/projection.jpg" width="1000">  
 
-* perspective
-* orthographique
+* Perspective
+* Orthographique
 
 ---
 
@@ -113,12 +121,17 @@ window.addEventListener('resize', () => {
 </code></pre>
 </section>
 
+### Exercice : déplacement FPS
+* contrôle clavier/souris
+* (flêche haut = déplacement dans la direction visée)
+
+---
+
 ### Matériaux et couleurs
 
 <img src="images/materials.png" width="700">  
 * Propriétés visuelles de l'objet (mais pas que)
 * Entièrement customs : shaders
-* dot product (produit scalaire) : a · b = |a| × |b| × cos(θ)
 
 Note:
 Principalement utilisé pour définir les propriétés visuelles (réaction à la lumière)
@@ -127,13 +140,9 @@ Principalement utilisé pour définir les propriétés visuelles (réaction à l
 
 ### Couleurs
 
-<img src="images/materials.png" width="700">  
+<img src="images/colors.gif" width="400">  
 3 composantes : rouge, vert, bleu
-couleurs additives
-
----
-
-### Couleurs
+Mode : couleurs additives
 
 * float : 0 à 1
 * integer : 0 * 255
@@ -142,13 +151,18 @@ couleurs additives
 ---
 
 ### Principaux matériaux
+* MeshBasicMaterial
+* MeshLambertMaterial
+* MeshPhongMaterial
+* MeshNormalMaterial
+* ...  
 [https://threejs.org/docs](https://threejs.org/docs)
 
 ---
 
 ### Exercice : créer un système solaire
 * Soleil
-* Terre + Lune
+* Terre + Lune, Mars, ...
 * Quelques planètes avec différents matériaux
 
 ---
