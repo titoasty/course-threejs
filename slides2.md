@@ -1,5 +1,5 @@
 ## three.js
-### Graphe de scène, transformations
+### Transformations, graphe de scène
 ### Caméras, matériaux & couleurs
 
 Nicolas Bouvet
@@ -12,6 +12,26 @@ Note:
 rappel
 
 ---
+
+### Transformations
+
+* translation
+* rotation
+* scale
+Note:
+transformations -> matrice de transformation
+matrices multipliées suivant le graphe de scène
+
+<section>
+<h3>Transformations</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial());
+
+console.log(mesh.position);
+console.log(mesh.rotation);
+console.log(mesh.scale);
+</code></pre>
+</section>
 
 ### Graphe de scène
 ![](images/scenegraph.png)
@@ -52,26 +72,6 @@ new THREE.Object3D();
 * Les animer indépendamment (clavier/souris/auto)
 
 ---
-
-### Transformations
-
-* translation
-* rotation
-* scale
-Note:
-transformations -> matrice de transformation
-matrices multipliées suivant le graphe de scène
-
-<section>
-<h3>Transformations</h3>
-<pre><code data-trim data-noescape style="max-height: 700px;">
-var mesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial());
-
-console.log(mesh.position);
-console.log(mesh.rotation);
-console.log(mesh.scale);
-</code></pre>
-</section>
 
 ### Caméras
 
@@ -157,6 +157,71 @@ Mode : couleurs additives
 * MeshNormalMaterial
 * ...  
 [https://threejs.org/docs](https://threejs.org/docs)
+
+---
+
+### Textures
+
+Différents types :
+* Color map
+* Bump map
+* Specular map
+* Environment map
+
+Requis : coordonnées UVs
+
+### Color map
+
+<img src="images/uv_map.jpg" width="600">
+
+<section>
+<h3>Charger et appliquer une texture</h3>
+<pre><code data-trim data-noescape style="max-height: 700px;">
+var texture = new THREE.TextureLoader().load('images/cube.png');
+var material = new THREE.MeshBasicMaterial({
+    map: texture
+});
+</code></pre>
+</section>
+
+### Bump map
+<img src="images/bump_map.jpg" width="600">  
+* Texture noir & blanc
+* Utilisé pour ajouter de la granularité
+
+---
+
+### Normal map
+
+<img src="images/normal_map.jpg" width="1000">  
+* Evolution du bump map
+* Texture RGB -> normales XYZ
+* Economie de faces
+
+---
+
+### Ex: Color map
+
+<img src="images/color_map.jpg" width="600">  
+
+---
+
+### Ex: Bump map
+
+<img src="images/bump_map2.jpg" width="600">  
+
+---
+
+### Ex: Normal map
+
+<img src="images/normal_map2.jpg" width="600">  
+
+---
+
+### Color + Bump + Normal maps
+
+<img src="images/bump_normal_map.jpg" width="1000">  
+
 
 ---
 
