@@ -51,7 +51,7 @@ Ceci signifie qu'un nœud peut avoir plusieurs enfants mais seulement un parent.
 <section>
 <h3>Graphe de scène</h3>
 <img src="images/cubes_graph.png">
-<pre><code data-trim data-noescape style="max-height: 700px;">
+<pre><code data-trim data-noescape style="max-height: 500px;">
 var scene = new THREE.Scene();
 
 var parent = new THREE.Mesh(new THREE.BoxGeometry(200, 200, 200), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
@@ -94,13 +94,13 @@ THREE.PerspectiveCamera(fov, aspect, near, far)
 <section>
 <h3>Perspective camera</h3>
 <pre><code data-trim data-noescape style="max-height: 700px;">
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
 </code></pre>
 </section>
 
 #### Orthographic camera
 
-<img src="images/ortho_frustum.jpg" width="700">  
+<img src="images/ortho_frustum.jpg" width="450px">  
 THREE.OrthographicCamera(left, right, top, bottom, near, far)
 * left — Camera frustum left plane.
 * right — Camera frustum right plane.
@@ -129,7 +129,7 @@ window.addEventListener('resize', () => {
 
 ### Matériaux et couleurs
 
-<img src="images/materials.png" width="700">  
+<img src="images/materials.png" width="600px">  
 * Propriétés visuelles de l'objet (mais pas que)
 * Entièrement customs : shaders
 
@@ -140,8 +140,8 @@ Principalement utilisé pour définir les propriétés visuelles (réaction à l
 
 ### Couleurs
 
-<img src="images/colors.gif" width="400">  
-3 composantes : rouge, vert, bleu
+<img src="images/colors.gif" width="300">  
+3 composantes : rouge, vert, bleu  
 Mode : couleurs additives
 
 * float : 0 à 1
@@ -170,6 +170,8 @@ Différents types :
 
 Requis : coordonnées UVs
 
+---
+
 ### Color map
 
 <img src="images/uv_map.jpg" width="600">
@@ -178,6 +180,7 @@ Requis : coordonnées UVs
 <h3>Charger et appliquer une texture</h3>
 <pre><code data-trim data-noescape style="max-height: 700px;">
 var texture = new THREE.TextureLoader().load('images/cube.png');
+
 var material = new THREE.MeshBasicMaterial({
     map: texture
 });
