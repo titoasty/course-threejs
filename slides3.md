@@ -1,7 +1,21 @@
 ## three.js
-### Lumières, textures, meshes
+### Lumières, meshes
 
 Nicolas Bouvet
+
+---
+
+### Lumières
+<img src="images/light_types.svg" width="500" style="background-color: #ffffff;">  
+* Ambient light : lumière diffuse
+* Directional light : soleil
+* Point light : ampoule, feu, ...
+* Spot light : projecteur, réverbère
+
+---
+
+### Lumières
+<img src="images/lights.jpg" width="600">  
 
 ---
 
@@ -55,11 +69,11 @@ alpha : angle entre r et v > utilisé pour calculer l'intensité du composant sp
 new THREE.AmbientLight(0x404040);
 
 new THREE.DirectionalLight(0xffffff, 0.5);
-light.position;
-light.target;
+// light.position;
+// light.target;
 
 new THREE.PointLight(0xff0000, 1, 100);
-light.position;
+// light.position;
 </code></pre>
 </section>
 
